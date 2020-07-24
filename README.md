@@ -50,9 +50,21 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Can you explain exception handling in your application?
+
+Exception handling in my application is implemented through throws and an exception is raised if what is expected doesn't happen.
+
 2. Can you explain your user authentication flow?
+
+Authentication flow happens between the client application and the resource owner, as well as with the resource and authorization servers. There is flow of authentication between the authorization and resource servers. 
+
 3. Can you show me your unit tests and describe how they work?
+
+
+
 4. Can you show how you deployed your application to a cloud service with a persistent database?
+
+
+
 
 ## Instructions
 
