@@ -33,6 +33,12 @@ public class BookServiceImplTest
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private AuthorService authorService;
+
+    @Autowired
+    private SectionService sectionService;
+
     @Before
     public void setUp() throws
             Exception
@@ -85,7 +91,7 @@ public class BookServiceImplTest
 
         Author a2 = new Author();
         Section s1 = new Section(sectionName);
-
+        s1.setSectionid(1);
         String book2Name = "Test This";
         Book b2 = new Book(book2Name, "9788489367012", 2007, s1);
 
@@ -93,7 +99,11 @@ public class BookServiceImplTest
                 .add(new Wrote(a2, new Book()));
         b2.setBookid(26);
 
+
+        a2 = authorService.save(a2);
+        s1 = sectionService.save(s1);
         b2 = bookService.save(b2);
+
 
         Book addBook = bookService.save(b2);
         assertNotNull(addBook);
