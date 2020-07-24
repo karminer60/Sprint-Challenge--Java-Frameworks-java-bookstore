@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -32,6 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
+
 
 /*****
  * Due to security being in place, we have to switch out WebMvcTest for SpringBootTest
@@ -203,33 +205,38 @@ public class BookControllerTest
         b1.setBookid(0);
         b1.getWrotes()
                 .add(new Wrote(a6, new Book()));
-        b1 = bookService.save(b1);
+        bookService.save(b1);
+        bookList.add(b1);
 
         Book b2 = new Book("Test Digital Fortess", "9788489367012", 2007, s1);
-        b1.setBookid(1);
+        b2.setBookid(1);
         b2.getWrotes()
                 .add(new Wrote(a2, new Book()));
-        b2 = bookService.save(b2);
+        bookService.save(b2);
+        bookList.add(b2);
 
         Book b3 = new Book("Test The Da Vinci Code", "9780307474278", 2009, s1);
-        b1.setBookid(3);
+        b3.setBookid(3);
         b3.getWrotes()
                 .add(new Wrote(a2, new Book()));
-        b3 = bookService.save(b3);
+        bookService.save(b3);
+        bookList.add(b3);
 
         Book b4 = new Book("Test Essentials of Finance", "1314241651234", 0, s4);
-        b1.setBookid(4);
+        b4.setBookid(4);
         b4.getWrotes()
                 .add(new Wrote(a3, new Book()));
         b4.getWrotes()
                 .add(new Wrote(a5, new Book()));
-        b4 = bookService.save(b4);
+        bookService.save(b4);
+        bookList.add(b4);
 
         Book b5 = new Book("Test Calling Texas Home", "1885171382134", 2000, s3);
-        b1.setBookid(5);
+        b5.setBookid(5);
         b5.getWrotes()
                 .add(new Wrote(a4, new Book()));
-        b5 = bookService.save(b5);
+        bookService.save(b5);
+        bookList.add(b5);
 
     }
 
@@ -261,8 +268,8 @@ public class BookControllerTest
             Exception
     {
 
-        String apiUrl = "/restaurants/restaurant/12";
-        Mockito.when(bookService.findBookById(12)).thenReturn(bookList.get(0));
+        String apiUrl = "/books/book/1";
+        Mockito.when(bookService.findBookById(1)).thenReturn(bookList.get(0));
 
         RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
         MvcResult r = mockMvc.perform(rb).andReturn();
@@ -278,7 +285,7 @@ public class BookControllerTest
     public void getNoBookById() throws
             Exception
     {
-        String apiUrl = "/restaurants/restaurant/777";
+        String apiUrl = "/books/book/777";
         Mockito.when(bookService.findBookById(777)).thenReturn(null);
 
         RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
@@ -330,9 +337,9 @@ public class BookControllerTest
     public void deleteBookById() throws
             Exception
     {
-        String apiUrl = "/restaurants/restaurant/{restaurantid}";
+        String apiUrl = "/books/book/{bookid}";
 
-        RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl, "13")
+        RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl, "1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
         mockMvc.perform(rb)

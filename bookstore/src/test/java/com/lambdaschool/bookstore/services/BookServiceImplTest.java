@@ -61,7 +61,7 @@ public class BookServiceImplTest
     @Test
     public void findAll()
     {
-        assertEquals(5,bookService.findAll().size());
+        assertEquals(4,bookService.findAll().size());
     }
 
     @Test
