@@ -88,6 +88,10 @@
             <version>2.3.6.RELEASE</version>
         </dependency>
         <!-- Security Dependencies End -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
