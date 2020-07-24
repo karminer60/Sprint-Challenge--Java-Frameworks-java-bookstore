@@ -50,6 +50,12 @@ public class BookServiceImplTest
         {
             System.out.println(b.getBookid() + " " + b.getTitle());
         }
+
+        List<Section> sectionList = sectionService.findAll();
+        for(Section s: sectionList)
+        {
+            System.out.println(s.getSectionid() + " " + s.getClass());
+        }
     }
 
     @After
@@ -89,18 +95,17 @@ public class BookServiceImplTest
 
         String sectionName = "genre";
 
-        Author a2 = new Author();
+
         Section s1 = new Section(sectionName);
-        s1.setSectionid(1);
+        s1.setSectionid(21);
         String book2Name = "Test This";
         Book b2 = new Book(book2Name, "9788489367012", 2007, s1);
 
-        b2.getWrotes()
-                .add(new Wrote(a2, new Book()));
+
         b2.setBookid(26);
 
 
-        a2 = authorService.save(a2);
+
         s1 = sectionService.save(s1);
         b2 = bookService.save(b2);
 
