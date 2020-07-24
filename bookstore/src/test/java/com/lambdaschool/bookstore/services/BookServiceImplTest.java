@@ -2,6 +2,7 @@ package com.lambdaschool.bookstore.services;
 
 import com.lambdaschool.bookstore.BookstoreApplication;
 import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
+import com.lambdaschool.bookstore.models.Book;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +32,12 @@ public class BookServiceImplTest
             Exception
     {
         MockitoAnnotations.initMocks(this);
+
+        List<Book> myList = bookService.findAll();
+        for(Book b: myList)
+        {
+            System.out.println(b.getBookid() + " " + b.getTitle());
+        }
     }
 
     @After
@@ -46,6 +55,7 @@ public class BookServiceImplTest
     @Test
     public void findBookById()
     {
+        assertEquals("Test Essentials of Finance", bookService.findBookById(29).getTitle());
     }
 
     @Test(expected = ResourceNotFoundException.class)
