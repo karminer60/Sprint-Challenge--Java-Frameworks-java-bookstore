@@ -3,6 +3,8 @@ package com.lambdaschool.bookstore.services;
 import com.lambdaschool.bookstore.BookstoreApplication;
 import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
 import com.lambdaschool.bookstore.models.Book;
+import com.lambdaschool.bookstore.models.Wrote;
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BookstoreApplication.class)
@@ -61,16 +64,29 @@ public class BookServiceImplTest
     @Test(expected = ResourceNotFoundException.class)
     public void notFindBookById()
     {
+        TestCase.assertEquals("Test Eagle Cafe", bookService.findBookById(777).getTitle());
     }
 
     @Test
     public void delete()
     {
+        bookService.delete(26);
+        TestCase.assertEquals(4, bookService.findAll().size());
     }
 
     @Test
     public void save()
     {
+        String book2Name = "Test Digital Fortess";
+        Book b2 = new Book("Test Digital Fortess", "9788489367012", 2007, s1);
+        b2.getWrotes()
+                .add(new Wrote(a2, new Book()));
+        b2 = bookService.save(b2);
+
+        Book addBook = bookService.save(r2);
+        assertNotNull(addBook);
+        TestCase.assertEquals(book2Name, addBook.getTitle());
+
     }
 
     @Test
