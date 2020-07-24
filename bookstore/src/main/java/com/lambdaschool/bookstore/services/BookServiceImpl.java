@@ -48,6 +48,7 @@ public class BookServiceImpl
                 .orElseThrow(() -> new ResourceNotFoundException("Book with id " + id + " Not Found!"));
     }
 
+
     @Transactional
     @Override
     public void delete(long id)
