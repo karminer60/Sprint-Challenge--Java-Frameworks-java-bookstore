@@ -2,7 +2,7 @@ package com.lambdaschool.bookstore.controllers;
 
 import com.lambdaschool.bookstore.BookstoreApplication;
 import com.lambdaschool.bookstore.models.*;
-import com.lambdaschool.bookstore.services.BookService;
+import com.lambdaschool.bookstore.services.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +45,19 @@ public class BookControllerTest
     @MockBean
     private BookService bookService;
 
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private RoleService roleService;
+
+    @MockBean
+    private AuthorService authorService;
+
+    @MockBean
+    private SectionService sectionService;
+
     List<Book> bookList = new ArrayList<>();
 
     @Before
@@ -58,10 +71,13 @@ public class BookControllerTest
                 .apply(SecurityMockMvcConfigurers.springSecurity())
                 .build();
 
+
         /*****
          * Note that since we are only testing bookstore data, you only need to mock up bookstore data.
          * You do NOT need to mock up user data. You can. It is not wrong, just extra work.
          */
+
+
 
         bookList = new ArrayList<>();
 

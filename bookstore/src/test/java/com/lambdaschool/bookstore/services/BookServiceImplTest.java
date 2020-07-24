@@ -2,7 +2,9 @@ package com.lambdaschool.bookstore.services;
 
 import com.lambdaschool.bookstore.BookstoreApplication;
 import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
+import com.lambdaschool.bookstore.models.Author;
 import com.lambdaschool.bookstore.models.Book;
+import com.lambdaschool.bookstore.models.Section;
 import com.lambdaschool.bookstore.models.Wrote;
 import junit.framework.TestCase;
 import org.junit.After;
@@ -12,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -77,13 +80,22 @@ public class BookServiceImplTest
     @Test
     public void save()
     {
-        String book2Name = "Test Digital Fortess";
-        Book b2 = new Book("Test Digital Fortess", "9788489367012", 2007, s1);
+
+        String sectionName = "genre";
+
+        Author a2 = new Author();
+        Section s1 = new Section(sectionName);
+
+        String book2Name = "Test This";
+        Book b2 = new Book(book2Name, "9788489367012", 2007, s1);
+
         b2.getWrotes()
                 .add(new Wrote(a2, new Book()));
+        b2.setBookid(26);
+
         b2 = bookService.save(b2);
 
-        Book addBook = bookService.save(r2);
+        Book addBook = bookService.save(b2);
         assertNotNull(addBook);
         TestCase.assertEquals(book2Name, addBook.getTitle());
 
